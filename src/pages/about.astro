@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../data/products";
+
+const title = "About · AladoooWu";
+---
+
+<Base title={title} description={`${SITE.name} 的简介与联系方式`}>
+  <article class="about">
+    <span class="orange-bar" aria-hidden="true"></span>
+    <h1 class="title">About</h1>
+
+    <section class="bio">
+      <p>
+        <strong>{SITE.name}</strong>，全栈开发者，一线 AI 观察者与实践者。做工具、写代码、带团队把
+        AI 落到活儿上。
+      </p>
+      <p>
+        在做的：<a href="/orangeink/">橙墨 orangeink</a>
+        （开源的单文件公众号排版器，Markdown 进、合规富文本出）；筹备中的：个人知识库「外脑」。实验室里还有
+        <a href="https://kday.world/" target="_blank" rel="noopener noreferrer">KDay</a>
+        和 <a href="https://pindoo.vercel.app/" target="_blank" rel="noopener noreferrer">Pindoo</a>
+        两个持续运行的小实验。
+      </p>
+      <p>
+        {SITE.now}
+      </p>
+      <p class="belief">相信「把事想清楚，比会用工具更重要」。</p>
+    </section>
+
+    <section class="contact">
+      <h2 class="section-title">联系</h2>
+      <ul class="contact-list">
+        <li>
+          <span class="label">Email</span>
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </li>
+        <li>
+          <span class="label">GitHub</span>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">
+            {SITE.github.replace("https://", "")} ↗
+          </a>
+        </li>
+      </ul>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .title {
+    margin: 16px 0 24px;
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .bio p {
+    margin: 0 0 16px;
+    max-width: 640px;
+  }
+
+  .belief {
+    color: var(--muted);
+  }
+
+  .contact {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 640px;
+  }
+
+  .contact-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    width: 64px;
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .contact-list a:hover {
+    color: var(--accent);
+  }
+</style>

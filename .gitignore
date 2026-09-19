@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+npm-debug.log*
+*.log
+.tmp-pillow/
+.venv-setup.log
+.git-commit-msg.txt
+# WorkBuddy 内部工作数据，不入公开仓库
+.workbuddy/
+# 内部文档与运维脚本不入公开仓库（含本机路径与内部决策记录）
+docs/plan-v0.4.md
+scripts/check_repo.py
+scripts/create_repo.py
+scripts/recreate_repo.py
+scripts/verify_remote.py

@@ -1,0 +1,151 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+const statusClass: Record<string, string> = {
+  维护中: "status-maintain",
+  即将上线: "status-soon",
+  实验: "status-lab",
+  已停: "status-stopped",
+};
+---
+
+<article class="card">
+  <header class="card-head">
+    <h3 class="card-title">
+      {product.detail ? (
+        <a href={product.detail} class="title-link">{product.name}</a>
+      ) : (
+        product.name
+      )}
+    </h3>
+    <span class={`status ${statusClass[product.status] ?? ""}`}>
+      {product.status}
+    </span>
+  </header>
+
+  <p class="card-tagline">{product.tagline}</p>
+
+  {product.links.length > 0 && (
+    <div class="card-links">
+      {product.links.map((link) => (
+        <a
+          href={link.url}
+          class="card-link"
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+          download={link.download ? "" : undefined}
+        >
+          {link.label}
+          {link.external && <span class="arrow">↗</span>}
+        </a>
+      ))}
+    </div>
+  )}
+</article>
+
+<style>
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(28, 25, 23, 0.06);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .title-link:hover {
+    color: var(--accent);
+  }
+
+  /* 状态胶囊：统一 12px 白字/暖字规范 */
+  .status {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .status-maintain {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .status-soon {
+    border: 1px dashed var(--border);
+    color: var(--muted);
+  }
+
+  .status-lab {
+    background: var(--module);
+    color: var(--faint);
+    font-weight: 600;
+  }
+
+  .status-stopped {
+    background: var(--border);
+    color: var(--muted);
+  }
+
+  .card-tagline {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    flex: 1;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .card-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-title);
+    border-bottom: 1px solid transparent;
+  }
+
+  .card-link:hover {
+    color: var(--accent);
+  }
+
+  .arrow {
+    font-size: 0.78em;
+    margin-left: 2px;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,233 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+import { SITE } from "../data/products";
+
+const {
+  title = SITE.name,
+  description = SITE.tagline,
+} = Astro.props;
+
+// 导航：logo 即首页入口，不重复放「首页」
+const nav = [
+  { label: "橙墨", url: "/orangeink/" },
+  { label: "About", url: "/about/" },
+];
+
+const ogImage = "https://aladooo.com/og.png";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content="https://aladooo.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">{SITE.name}</a>
+        <nav class="site-nav">
+          {nav.map((item) => <a href={item.url}>{item.label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© {new Date().getFullYear()} {SITE.name}</span>
+        <span class="footer-links">
+          <a href={`mailto:${SITE.email}`}>Email</a>
+          <span class="dot">·</span>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /* ============================================================
+     Design tokens · 方案A「炭黑 x 亮橙」语言
+     - 标题炭黑 #1c1917 / 正文暖炭 #26221c / 题注 #6b6154
+     - 亮橙 #ff5a00 只做条/点/hover 装饰，不做正文文字色
+     - 链接文字用深橙 #c23a00（白底 5.4:1，过 AA）
+     - 模块底米色 #fff3e7，分割条 = 亮橙实条
+     ============================================================ */
+  :root {
+    --bg: #faf9f7;            /* 纸白底 */
+    --ink-title: #1c1917;     /* 标题炭黑 */
+    --ink: #26221c;           /* 正文暖炭 */
+    --muted: #6b6154;         /* 题注/次级 */
+    --faint: #8a663a;         /* 落款/标签 */
+    --border: #e8e1d5;        /* 暖色边框 */
+    --accent: #ff5a00;        /* 亮橙：条/点/hover */
+    --link: #c23a00;          /* 链接文字色 */
+    --module: #fff3e7;        /* 模块底米色 */
+    --card-bg: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  h1, h2, h3 {
+    color: var(--ink-title);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* 正文区裸链接：深橙 + hover 亮橙下划线（:where 零特异性，可被局部样式覆盖） */
+  main :where(a) {
+    color: var(--link);
+  }
+
+  main :where(a):hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* 方案A 分割条：亮橙实条 */
+  .orange-bar {
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  /* 头部 */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink-title);
+  }
+
+  .brand::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 6px;
+    border-radius: 2px;
+    background: var(--accent);
+    vertical-align: 2px;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 24px;
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .site-nav a:hover {
+    color: var(--accent);
+  }
+
+  main {
+    flex: 1;
+    padding: 48px 24px 64px;
+  }
+
+  /* 小节标题（统一规范：13px 大写字距） */
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 16px;
+  }
+
+  /* 底部 */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0 32px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+
+  .dot {
+    margin: 0 8px;
+    color: var(--border);
+  }
+
+  @media (max-width: 640px) {
+    main {
+      padding: 32px 24px 48px;
+    }
+    .site-nav {
+      gap: 16px;
+    }
+  }
+</style>
