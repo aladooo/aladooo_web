@@ -48,6 +48,14 @@ const personJsonLd = JSON.stringify({
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#ff5a00" />
     <script type="application/ld+json" set:html={personJsonLd} />
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-CTHY4P08HC"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-CTHY4P08HC");
+    </script>
     <title>{title}</title>
   </head>
   <body>
