@@ -18,6 +18,15 @@ const nav = [
 ];
 
 const ogImage = "https://aladooo.com/og.png";
+const canonical = `https://www.aladooo.com${Astro.url.pathname}`;
+
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: "https://www.aladooo.com/",
+  sameAs: [SITE.github],
+});
 ---
 
 <!doctype html>
@@ -32,8 +41,13 @@ const ogImage = "https://aladooo.com/og.png";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:url" content="https://aladooo.com/" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ff5a00" />
+    <script type="application/ld+json" set:html={personJsonLd} />
     <title>{title}</title>
   </head>
   <body>
@@ -188,13 +202,12 @@ const ogImage = "https://aladooo.com/og.png";
     padding: 48px 24px 64px;
   }
 
-  /* 小节标题（统一规范：13px 大写字距） */
+  /* 小节标题（统一规范：13px 中文小标；中文无大小写，不用 uppercase） */
   .section-title {
     font-size: 13px;
     font-weight: 600;
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     margin: 0 0 16px;
   }
 

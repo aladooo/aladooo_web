@@ -9,7 +9,10 @@ const featuredGithub = featured?.links.find((l) => l.label === "GitHub");
 const download = featured?.links.find((l) => l.download);
 ---
 
-<Base title={`${SITE.name} · ${SITE.tagline}`} description={SITE.tagline}>
+<Base
+  title={`${SITE.name} · ${SITE.tagline}`}
+  description="AladoooWu 的作品站：橙墨（单文件公众号排版器）、外脑（个人知识库），以及实验室里的两个小实验。"
+>
   <section class="hero">
     <span class="orange-bar" aria-hidden="true"></span>
     <h1 class="tagline">{SITE.tagline}</h1>
@@ -24,7 +27,9 @@ const download = featured?.links.find((l) => l.download);
   {featured && (
     <section class="featured">
       <h2 class="section-title">主推</h2>
-      <a class="feature-card" href={featured.detail}>
+      <div class="feature-card">
+        {/* 整卡可点：遮罩链接铺满卡片，按钮 z-index 更高可正常点击 */}
+        <a class="card-overlay" href={featured.detail} aria-label={`了解${featured.name}详情`}></a>
         <div class="feature-head">
           <h3 class="feature-name">{featured.name}</h3>
           <span class="status status-maintain">{featured.status}</span>
@@ -32,14 +37,14 @@ const download = featured?.links.find((l) => l.download);
         <p class="feature-tagline">{featured.tagline}</p>
         <div class="feature-actions">
           {download && (
-            <span class="btn btn-primary">下载 orangeink.html</span>
+            <a class="btn btn-primary" href={download.url} download>下载 orangeink.html</a>
           )}
           {featuredGithub && (
-            <span class="btn">GitHub ↗</span>
+            <a class="btn" href={featuredGithub.url} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           )}
           <span class="feature-more">了解详情 →</span>
         </div>
-      </a>
+      </div>
     </section>
   )}
 
@@ -88,26 +93,24 @@ const download = featured?.links.find((l) => l.download);
 
   .tagline {
     margin: 16px 0 10px;
-    font-size: 28px;
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
     font-weight: 800;
     letter-spacing: 0.01em;
     line-height: 1.35;
   }
 
-  @media (min-width: 640px) {
-    .tagline {
-      font-size: 32px;
-    }
-  }
-
   .sub {
-    margin: 0 0 8px;
+    margin: 0 0 14px;
     color: var(--muted);
   }
 
   .now {
+    display: inline-block;
     margin: 0;
-    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: var(--module);
+    color: var(--ink);
     font-size: 15px;
   }
 
@@ -124,24 +127,35 @@ const download = featured?.links.find((l) => l.download);
   }
 
   .featured {
-    margin-bottom: 40px;
+    margin-bottom: 56px;
   }
 
   /* 主推卡：方案A intro 模块语言（米色底 + 顶部 3px 亮橙条） */
   .feature-card {
+    position: relative;
     display: block;
     background: var(--module);
     border-top: 3px solid var(--accent);
     border-radius: 0 8px 8px 8px;
-    padding: 24px;
+    padding: 32px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
 
   .feature-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
-    color: inherit;
-    text-decoration: none;
+  }
+
+  /* 整卡可点的遮罩链接 */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 0 8px 8px 8px;
+  }
+
+  .feature-card:hover .feature-name {
+    color: var(--ink-title);
   }
 
   .feature-head {
@@ -149,17 +163,13 @@ const download = featured?.links.find((l) => l.download);
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .feature-name {
     margin: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
-  }
-
-  .feature-card:hover .feature-name {
-    color: var(--ink-title);
   }
 
   .status {
@@ -178,7 +188,7 @@ const download = featured?.links.find((l) => l.download);
   }
 
   .feature-tagline {
-    margin: 0 0 20px;
+    margin: 0 0 24px;
     color: var(--ink);
     max-width: 640px;
   }
@@ -186,18 +196,25 @@ const download = featured?.links.find((l) => l.download);
   .feature-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
+  }
+
+  .feature-actions .btn {
+    position: relative;
+    z-index: 2;
   }
 
   .btn {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 10px 22px;
     border-radius: 8px;
     border: 1px solid var(--ink-title);
     color: var(--ink-title);
     font-weight: 600;
     font-size: 15px;
+    min-height: 44px;
+    line-height: 1.5;
   }
 
   .btn-primary {
@@ -214,7 +231,7 @@ const download = featured?.links.find((l) => l.download);
 
   .works,
   .lab {
-    margin-bottom: 40px;
+    margin-bottom: 56px;
   }
 
   .grid {
