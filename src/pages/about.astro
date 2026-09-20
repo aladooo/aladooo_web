@@ -12,20 +12,24 @@ const title = "About · AladoooWu";
 
     <section class="bio">
       <p>
-        <strong>{SITE.name}</strong>，全栈开发者，一线 AI 观察者与实践者。做工具、写代码、带团队把
-        AI 落到活儿上。
+        <strong>{SITE.name}</strong>。白天带团队，把 AI 落到具体的活儿上；晚上做点自己想用的小工具。
       </p>
-      <p>
-        在做的：<a href="/orangeink/">橙墨 orangeink</a>
-        （开源的单文件公众号排版器，Markdown 进、合规富文本出）；筹备中的：个人知识库「外脑」。实验室里还有
-        <a href="https://kday.world/" target="_blank" rel="noopener noreferrer">KDay</a>
-        和 <a href="https://pindoo.vercel.app/" target="_blank" rel="noopener noreferrer">Pindoo</a>
-        两个持续运行的小实验。
-      </p>
-      <p>
-        {SITE.now}
-      </p>
-      <p class="belief">相信「把事想清楚，比会用工具更重要」。</p>
+      <p>一直在做的一件事——把 AI 从「会用」推到「用得上」：</p>
+      <ul class="doing">
+        <li>
+          在做：<a href="/orangeink/">橙墨 orangeink</a>
+          —— 开源的单文件公众号排版器，Markdown 进、合规富文本出。
+        </li>
+        <li>在筹备：外脑 —— 我的个人知识库。</li>
+        <li>
+          在养着：<a href="https://kday.world/" target="_blank" rel="noopener noreferrer">KDay</a>、<a
+            href="https://pindoo.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer">Pindoo</a>
+          —— 实验室里两个跑着玩的小实验。
+        </li>
+      </ul>
+      <p class="belief">我信一句话：把事想清楚，比会用工具更重要。</p>
     </section>
 
     <section class="contact">
@@ -56,6 +60,16 @@ const title = "About · AladoooWu";
   .bio p {
     margin: 0 0 16px;
     max-width: 640px;
+  }
+
+  .doing {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    max-width: 640px;
+  }
+
+  .doing li {
+    margin: 6px 0;
   }
 
   .belief {

@@ -14,7 +14,7 @@ const download = featured?.links.find((l) => l.download);
     <span class="orange-bar" aria-hidden="true"></span>
     <h1 class="tagline">{SITE.tagline}</h1>
     <p class="sub">
-      {SITE.name} —— 全栈开发者，一线 AI 观察者与实践者。
+      {SITE.name} · 全栈开发者，一线 AI 观察者与实践者。
     </p>
     <p class="now">
       <span class="now-label">Now</span>{SITE.now}
@@ -45,7 +45,7 @@ const download = featured?.links.find((l) => l.download);
 
   {rest.length > 0 && (
     <section class="works">
-      <h2 class="section-title">产品 / 作品</h2>
+      <h2 class="section-title">在做</h2>
       <div class="grid">
         {rest.map((product) => <Card product={product} />)}
       </div>
@@ -55,7 +55,7 @@ const download = featured?.links.find((l) => l.download);
   {labProducts.length > 0 && (
     <section class="lab">
       <h2 class="section-title">实验室 Lab</h2>
-      <p class="lab-note">小想法的试验田，运行中但不承诺维护。</p>
+      <p class="lab-note">放进来跑的想法，不承诺维护。</p>
       <div class="grid">
         {labProducts.map((product) => <Card product={product} />)}
       </div>
@@ -70,6 +70,15 @@ const download = featured?.links.find((l) => l.download);
       <a href="/about/">About</a>
     </p>
   </section>
+
+  <script>
+    // KDay 天数计数：按 data-kday-start（起始日）计算「今天是第 N 天」
+    document.querySelectorAll<HTMLElement>("[data-kday-start]").forEach((el) => {
+      const start = new Date(el.dataset.kdayStart + "T00:00:00+08:00");
+      const days = Math.floor((Date.now() - start.getTime()) / 86400000) + 1;
+      if (days > 0) el.textContent = String(days);
+    });
+  </script>
 </Base>
 
 <style>
