@@ -10,6 +10,28 @@ const shots = [
   { src: "/orangeink-shot-2.jpg", alt: "橙墨排版成品示例：正文引用块" },
   { src: "/orangeink-shot-3.jpg", alt: "橙墨排版成品示例：参考与致谢" },
 ];
+
+// 版本记录：与仓库 CHANGELOG.md 保持同步（精简版，细节链到仓库）
+const changelog = [
+  {
+    ver: "v1.0.1",
+    date: "2026-09-19",
+    note: "自检器新增「加粗/斜体未生效」检测；页脚版本与元信息升级。",
+  },
+  {
+    ver: "v1.0.0",
+    date: "2026-09-16",
+    note: "首个开源版本：结构合规自检器、一键复制零「结构异常」、四套主题、四个结构化模块、被动脚注。",
+  },
+];
+
+// 后续方向：精选自仓库 ROADMAP.md（每条「缓/不纳入」都有理由）
+const roadmap = [
+  { name: "第二批结构化模块", status: "待社区反馈", note: "cards / metrics / 左右对比等，等真实需求出现再定" },
+  { name: "HTML → Markdown 导入", status: "社区票", note: "独立小功能，谁需要谁提 issue" },
+  { name: "图片能力（上传 / 图床）", status: "缓", note: "公众号外链图会被转存、防盗链，体验不可控" },
+  { name: "直接发草稿箱", status: "受阻", note: "公众号已收回个人号 API 发布权限，待条件具备再评估" },
+];
 ---
 
 <Base title={title} description={description}>
@@ -79,6 +101,50 @@ const shots = [
           target="_blank"
           rel="noopener noreferrer">GitHub 仓库</a>。</li>
       </ul>
+    </section>
+
+    <section class="changelog">
+      <h2 class="section-title">版本记录</h2>
+      <ol class="ver-list">
+        {changelog.map((item) => (
+          <li class="ver-item">
+            <span class="ver-badge">{item.ver}</span>
+            <span class="ver-date">{item.date}</span>
+            <span class="ver-note">{item.note}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="see-more">
+        完整更新记录见 <a
+          href="https://github.com/aladooo/orangeink/blob/main/CHANGELOG.md"
+          target="_blank"
+          rel="noopener noreferrer">CHANGELOG.md</a>，历史版本可在 <a
+          href="https://github.com/aladooo/orangeink/releases"
+          target="_blank"
+          rel="noopener noreferrer">Releases</a> 下载。
+      </p>
+    </section>
+
+    <section class="roadmap">
+      <h2 class="section-title">后续方向</h2>
+      <ul class="rd-list">
+        {roadmap.map((item) => (
+          <li class="rd-item">
+            <span class="rd-name">{item.name}</span>
+            <span class={`rd-status rd-${item.status === "待社区反馈" ? "wait" : item.status === "社区票" ? "vote" : "hold"}`}>{item.status}</span>
+            <span class="rd-note">{item.note}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="see-more">
+        以上是精选，完整决策记录见 <a
+          href="https://github.com/aladooo/orangeink/blob/main/ROADMAP.md"
+          target="_blank"
+          rel="noopener noreferrer">ROADMAP.md</a>；想要某个功能，欢迎去仓库提 <a
+          href="https://github.com/aladooo/orangeink/issues"
+          target="_blank"
+          rel="noopener noreferrer">issue</a>。
+      </p>
     </section>
   </article>
 </Base>
@@ -162,8 +228,7 @@ const shots = [
     font-size: 13px;
     font-weight: 600;
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     margin: 0 0 14px;
   }
 
@@ -221,6 +286,115 @@ const shots = [
   }
 
   .points a:hover {
+    color: var(--accent);
+  }
+
+  .changelog,
+  .roadmap {
+    margin-bottom: 56px;
+  }
+
+  /* 版本时间线 */
+  .ver-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ver-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ver-item:first-child {
+    padding-top: 0;
+  }
+
+  .ver-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-title);
+    background: var(--module);
+    border-radius: 6px;
+    padding: 2px 10px;
+    flex-shrink: 0;
+  }
+
+  .ver-date {
+    color: var(--faint);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .ver-note {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  /* 后续方向 */
+  .rd-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rd-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rd-item:first-child {
+    padding-top: 0;
+  }
+
+  .rd-name {
+    font-weight: 600;
+    color: var(--ink-title);
+  }
+
+  .rd-status {
+    font-size: 12px;
+    padding: 1px 10px;
+    border-radius: 99px;
+    flex-shrink: 0;
+  }
+
+  .rd-wait {
+    background: var(--module);
+    color: var(--faint);
+    font-weight: 600;
+  }
+
+  .rd-vote {
+    border: 1px dashed var(--border);
+    color: var(--muted);
+  }
+
+  .rd-hold {
+    background: var(--border);
+    color: var(--muted);
+  }
+
+  .rd-note {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .see-more {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .see-more a:hover {
     color: var(--accent);
   }
 
