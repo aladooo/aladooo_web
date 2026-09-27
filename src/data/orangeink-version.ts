@@ -10,7 +10,7 @@ import path from "node:path";
 const RELEASE_DATES: Record<string, string> = {
   "v1.1.0": "2026-09-27",
   "v1.0.1": "2026-09-19",
-  "v1.0.0": "2026-09-19",
+  "v1.0.0": "2026-09-16",
 };
 
 const WHATS_NEW: Record<string, string[]> = {
