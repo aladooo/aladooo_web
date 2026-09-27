@@ -1,0 +1,163 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getOrangeinkVersion } from "../../data/orangeink-version";
+
+const info = getOrangeinkVersion();
+---
+
+<Base
+  title={`橙墨版本 ${info.version} · AladoooWu`}
+  description={`橙墨 orangeink 当前版本 ${info.version}，检查并下载最新版。`}
+>
+  <article class="vpage">
+    <h1>橙墨版本</h1>
+    <div class="ver-box">
+      <span class="ver-num">{info.version}</span>
+      {info.released && <span class="ver-date">发布于 {info.released}</span>}
+    </div>
+
+    {info.whatsNew.length > 0 && (
+      <section class="whats-new">
+        <h2 class="section-title">这个版本改了什么</h2>
+        <ul>
+          {info.whatsNew.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+    )}
+
+    <p class="upgrade-hint">
+      橙墨是单文件工具，升级 = 重新下载一个文件覆盖旧版即可，无需卸载。
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/orangeink.html" download>
+        下载 {info.version}
+      </a>
+      <a class="btn" href="/orangeink/">了解橙墨</a>
+      <a
+        class="btn"
+        href={info.changelog}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        完整更新日志 ↗
+      </a>
+    </div>
+
+    <p class="api-hint">
+      工具/脚本自动检查更新可读
+      <a href="/orangeink/version.json"><code>/orangeink/version.json</code></a>
+      （JSON，含版本号与下载地址）。
+    </p>
+  </article>
+</Base>
+
+<style>
+  .vpage {
+    max-width: 640px;
+  }
+
+  h1 {
+    margin: 0 0 20px;
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .ver-box {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    background: var(--module);
+    border-top: 3px solid var(--accent);
+    border-radius: 0 8px 8px 8px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+
+  .ver-num {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  .ver-date {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .whats-new {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin: 0 0 10px;
+  }
+
+  .whats-new ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .whats-new li {
+    margin-bottom: 6px;
+  }
+
+  .upgrade-hint {
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--ink-title);
+    color: var(--ink-title);
+    font-weight: 600;
+    font-size: 15px;
+    min-height: 44px;
+    line-height: 24px;
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    color: #fff;
+  }
+
+  .api-hint {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .api-hint code {
+    background: var(--module);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+</style>
