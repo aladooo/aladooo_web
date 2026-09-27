@@ -8,11 +8,16 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.1.0": "2026-09-27",
   "v1.0.1": "2026-09-19",
   "v1.0.0": "2026-09-19",
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.1.0": [
+    "版本检查与升级提示：联网发现新版时页脚亮橙徽标，点击直达下载页",
+    "修复列表项加粗开头 → 后续文字被微信强制换行",
+  ],
   "v1.0.1": ["自检器新增「加粗 / 斜体未生效」检测"],
   "v1.0.0": ["首个公开发布版本"],
 };
