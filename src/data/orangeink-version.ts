@@ -8,12 +8,17 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.2.0": "2026-09-30",
   "v1.1.0": "2026-09-27",
   "v1.0.1": "2026-09-19",
   "v1.0.0": "2026-09-16",
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.2.0": [
+    "内置 Agent Skill（oimd）：headless 渲染 + 公众号合规管线 + 对拍护栏",
+    "一键复制页自带二次微调栏（主题 / 字号 / 边距 / 深色 / 手机预览）",
+  ],
   "v1.1.0": [
     "版本检查与升级提示：联网发现新版时页脚亮橙徽标，点击直达下载页",
     "修复列表项加粗开头 → 后续文字被微信强制换行",
