@@ -2,11 +2,13 @@
 import Base from "../layouts/Base.astro";
 import Card from "../components/Card.astro";
 import { SITE, homeProducts, labProducts } from "../data/products";
+import { getOrangeinkVersion } from "../data/orangeink-version";
 
 const featured = homeProducts.find((p) => p.featured);
 const rest = homeProducts.filter((p) => !p.featured);
 const featuredGithub = featured?.links.find((l) => l.label === "GitHub");
 const download = featured?.links.find((l) => l.download);
+const oiVersion = getOrangeinkVersion();
 ---
 
 <Base
@@ -35,6 +37,9 @@ const download = featured?.links.find((l) => l.download);
           <span class="status status-maintain">{featured.status}</span>
         </div>
         <p class="feature-tagline">{featured.tagline}</p>
+        <p class="feature-skill">
+          当前 {oiVersion.version} · 内置 Agent Skill：AI 助手接上即可一键排版成公众号内容
+        </p>
         <div class="feature-actions">
           {download && (
             <a class="btn btn-primary" href={download.url} download>下载 orangeink.html</a>
@@ -188,9 +193,15 @@ const download = featured?.links.find((l) => l.download);
   }
 
   .feature-tagline {
-    margin: 0 0 24px;
+    margin: 0 0 8px;
     color: var(--ink);
     max-width: 640px;
+  }
+
+  .feature-skill {
+    margin: 0 0 24px;
+    color: var(--muted);
+    font-size: 14px;
   }
 
   .feature-actions {

@@ -15,3 +15,6 @@ scripts/check_repo.py
 scripts/create_repo.py
 scripts/recreate_repo.py
 scripts/verify_remote.py
+# 凭据读取与临时元数据脚本，不入公开仓库
+scripts/read_gcm_cred.py
+scripts/update_orangeink_meta.py

@@ -16,7 +16,7 @@ const RELEASE_DATES: Record<string, string> = {
 
 const WHATS_NEW: Record<string, string[]> = {
   "v1.2.0": [
-    "内置 Agent Skill（oimd）：headless 渲染 + 公众号合规管线 + 对拍护栏",
+    "内置 Agent Skill（oimd）：AI 助手接上即可把 Markdown 一键排版成可直接发布公众号的内容（合规 HTML / 一键复制页 / 草稿箱 API 请求体）",
     "一键复制页自带二次微调栏（主题 / 字号 / 边距 / 深色 / 手机预览）",
   ],
   "v1.1.0": [

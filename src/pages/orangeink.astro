@@ -14,6 +14,11 @@ const shots = [
 // 版本记录：与仓库 CHANGELOG.md 保持同步（精简版，细节链到仓库）
 const changelog = [
   {
+    ver: "v1.2.0",
+    date: "2026-09-30",
+    note: "内置 Agent Skill（oimd）：AI 助手接上即可把 Markdown 一键排版成可直接发布公众号的内容（合规 HTML / 一键复制页 / 草稿箱 API 请求体）。",
+  },
+  {
     ver: "v1.1.0",
     date: "2026-09-27",
     note: "新增版本检查与升级提示：联网时静默检查官网最新版本，有新版页脚亮橙徽标直达下载；修复微信粘贴时列表项加粗开头导致的强制换行。",
@@ -106,6 +111,29 @@ const roadmap = [
           target="_blank"
           rel="noopener noreferrer">GitHub 仓库</a>。</li>
       </ul>
+    </section>
+
+    <section class="skill">
+      <h2 class="section-title">Agent Skill（oimd）</h2>
+      <p class="skill-lead">
+        橙墨不只活在浏览器里——它自带一个可安装的 Agent
+        Skill，把写作规范与合规渲染管线一起交给 AI 助手。接上之后，助手可以：
+      </p>
+      <ul class="points">
+        <li><strong>按规范写稿</strong>：产出符合橙墨写作规范的公众号 Markdown 文稿。</li>
+        <li><strong>一键排版</strong>：一条命令把 Markdown 渲染成三件套——纯净合规 HTML（API 用）、一键复制页（浏览器打开→复制→粘贴）、公众号草稿箱 API 请求体 JSON。</li>
+        <li><strong>发布前自检</strong>：输出自带静态合规自检，与网页版排版台同仓同版本、逐字节对拍。</li>
+      </ul>
+      <p class="skill-install">
+        一键安装（支持 Claude Code / Codex / Amp / Cline 等 79 个 agent）：
+        <code>npx skills add https://github.com/aladooo/orangeink/tree/main/orangeink</code>
+      </p>
+      <p class="see-more">
+        用法与文件结构见 <a
+          href="https://github.com/aladooo/orangeink/tree/main/orangeink"
+          target="_blank"
+          rel="noopener noreferrer">仓库 orangeink/ 目录</a>。
+      </p>
     </section>
 
     <section class="changelog">
@@ -296,9 +324,32 @@ const roadmap = [
     color: var(--accent);
   }
 
+  .skill,
   .changelog,
   .roadmap {
     margin-bottom: 56px;
+  }
+
+  .skill-lead {
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  .skill-install {
+    margin: 14px 0 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: var(--module);
+    font-size: 0.88rem;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .skill-install code {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: var(--link);
   }
 
   /* 版本时间线 */
