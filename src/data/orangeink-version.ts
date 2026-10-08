@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.2.2": "2026-10-09",
   "v1.2.1": "2026-10-08",
   "v1.2.0": "2026-09-30",
   "v1.1.0": "2026-09-27",
@@ -16,6 +17,9 @@ const RELEASE_DATES: Record<string, string> = {
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.2.2": [
+    "修复长 URL 链接在窄容器内横向溢出：链接文字为完整 URL 时自动断行（普通文字链接不受影响）",
+  ],
   "v1.2.1": [
     "修复自动链接把紧贴 URL 的全角标点与中文吸进链接导致的坏链",
     "自检器新增「代码内含链接」检测；CLI 自检补齐「加粗/斜体未生效」规则",
