@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.2.3": "2026-10-09",
   "v1.2.2": "2026-10-09",
   "v1.2.1": "2026-10-08",
   "v1.2.0": "2026-09-30",
@@ -17,6 +18,10 @@ const RELEASE_DATES: Record<string, string> = {
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.2.3": [
+    "Agent Skill 安装即用：jsdom 依赖随包声明，对拍护栏支持独立安装环境",
+    "skill 包 vendor 换未压缩发行版，通过安全审计",
+  ],
   "v1.2.2": [
     "修复长 URL 链接在窄容器内横向溢出：链接文字为完整 URL 时自动断行（普通文字链接不受影响）",
   ],
