@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.2.1": "2026-10-08",
   "v1.2.0": "2026-09-30",
   "v1.1.0": "2026-09-27",
   "v1.0.1": "2026-09-19",
@@ -15,6 +16,10 @@ const RELEASE_DATES: Record<string, string> = {
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.2.1": [
+    "修复自动链接把紧贴 URL 的全角标点与中文吸进链接导致的坏链",
+    "自检器新增「代码内含链接」检测；CLI 自检补齐「加粗/斜体未生效」规则",
+  ],
   "v1.2.0": [
     "内置 Agent Skill（oimd）：AI 助手接上即可把 Markdown 一键排版成可直接发布公众号的内容（合规 HTML / 一键复制页 / 草稿箱 API 请求体）",
     "一键复制页自带二次微调栏（主题 / 字号 / 边距 / 深色 / 手机预览）",
