@@ -169,14 +169,19 @@ const roadmap = [
     <section class="changelog">
       <h2 class="section-title">版本记录</h2>
       <ol class="ver-list">
-        {changelog.map((item) => (
-          <li class="ver-item">
+        {changelog.map((item, idx) => (
+          <li class:list={["ver-item", { "ver-hidden": idx >= 3 }]} hidden={idx >= 3}>
             <span class="ver-badge">{item.ver}</span>
             <span class="ver-date">{item.date}</span>
             <span class="ver-note">{item.note}</span>
           </li>
         ))}
       </ol>
+      {changelog.length > 3 && (
+        <button id="ver-toggle" class="ver-toggle" type="button" aria-expanded="false">
+          展开全部 {changelog.length} 条 ↓
+        </button>
+      )}
       <p class="see-more">
         完整更新记录见 <a
           href="https://github.com/aladooo/orangeink/blob/main/CHANGELOG.md"
@@ -213,6 +218,24 @@ const roadmap = [
     </section>
   </article>
 </Base>
+
+<script>
+  // 版本记录折叠：默认近 3 条，其余折叠，按钮切换展开/收起
+  const btn = document.getElementById("ver-toggle");
+  const hiddenItems = document.querySelectorAll(".ver-item[hidden]");
+  if (btn && hiddenItems.length > 0) {
+    const total = btn.closest(".changelog")!.querySelectorAll(".ver-item").length;
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      hiddenItems.forEach((el) => {
+        if (expanded) el.setAttribute("hidden", "");
+        else el.removeAttribute("hidden");
+      });
+      btn.setAttribute("aria-expanded", String(!expanded));
+      btn.textContent = expanded ? `展开全部 ${total} 条 ↓` : "收起 ↑";
+    });
+  }
+</script>
 
 <style>
   .product-head {
@@ -421,6 +444,27 @@ const roadmap = [
   .ver-note {
     color: var(--ink);
     font-size: 0.95rem;
+  }
+
+  /* 折叠条目与展开按钮 */
+  .ver-item[hidden] {
+    display: none;
+  }
+
+  .ver-toggle {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .ver-toggle:hover {
+    color: var(--accent);
   }
 
   /* 后续方向 */
