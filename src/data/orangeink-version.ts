@@ -8,6 +8,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const RELEASE_DATES: Record<string, string> = {
+  "v1.2.9": "2026-10-14",
+  "v1.2.8": "2026-10-14",
+  "v1.2.7": "2026-10-14",
   "v1.2.3": "2026-10-09",
   "v1.2.2": "2026-10-09",
   "v1.2.1": "2026-10-08",
@@ -18,6 +21,18 @@ const RELEASE_DATES: Record<string, string> = {
 };
 
 const WHATS_NEW: Record<string, string[]> = {
+  "v1.2.9": [
+    "小说稿排版修复：引子与结尾帧规格行互吞、章节行幕收束尾缀误入章题",
+    "收束卡统一渲染到文末；CLI 新增 --chapter 兜底章题",
+  ],
+  "v1.2.8": [
+    "修复海棠主题下复制页微调栏失效（微调即崩溃）",
+    "小说刊头渲染改用 section，规避公众号粘贴 div 样式剥除",
+  ],
+  "v1.2.7": [
+    "新主题「海棠」（第 5 套，深蓝×橙金×朱红）+ 小说范式层",
+    "章节行、幕终行、落款行自动识别；引子 / 结尾帧规格行支持",
+  ],
   "v1.2.3": [
     "Agent Skill 安装即用：jsdom 依赖随包声明，对拍护栏支持独立安装环境",
     "skill 包 vendor 换未压缩发行版，通过安全审计",
